@@ -1,0 +1,5 @@
+#we use kotlin
+language: java
+
+jdk:
+ - openjdk11
