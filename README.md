@@ -2,4 +2,4 @@
 Database Load Testing
 
 
-[![Build Status](https://travis-ci.com/RVRhub/db-perf.svg)](https://travis-ci.com/ccizer/db-perf)
+[![Build Status](https://travis-ci.com/RVRhub/db-perf.svg)](https://travis-ci.com/RVRhub/db-perf)
