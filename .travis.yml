@@ -1,8 +1,9 @@
-#we use kotlin
+#we use java
 language: java
 
+#we add the java development kit (jdk)
 jdk:
- - openjdk11
+- openjdk8
  
 script:
 #We avoid this error :" the job exceeded the maximum log length and has been terminated "
