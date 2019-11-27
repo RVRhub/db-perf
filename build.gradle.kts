@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
 	id("org.springframework.boot") version "2.2.1.RELEASE"
@@ -6,6 +7,7 @@ plugins {
 	id("com.gradle.build-scan") version "2.1"
 	kotlin("jvm") version "1.3.50"
 	kotlin("plugin.spring") version "1.3.50"
+	id("com.palantir.docker") version "0.22.1"
 }
 
 group = "com.rvr"
@@ -40,4 +42,20 @@ tasks.withType<KotlinCompile> {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "1.8"
 	}
+}
+
+task<Copy>("unpack") {
+	val bootJar = tasks.getByName<BootJar>("bootJar")
+	dependsOn(bootJar)
+	from(zipTree(bootJar.outputs.files.singleFile))
+	into("build/dependency")
+}
+
+docker {
+	val archiveBaseName = tasks.getByName<BootJar>("bootJar").archiveBaseName.get()
+	name = "rybak90/$archiveBaseName"
+	setDockerfile(file("Dockerfile"))
+	copySpec.from(tasks.getByName<Copy>("unpack").outputs).into("dependency")
+	buildArgs(mapOf("DEPENDENCY" to "dependency"))
+	noCache(true) 
 }
