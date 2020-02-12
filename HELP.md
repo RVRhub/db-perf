@@ -19,3 +19,46 @@ These additional references should also help you:
 
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
 
+
+
+### Docker build image 
+
+```shell script
+docker build -t db-perf .
+```
+
+### Running the docker image
+
+```shell script
+docker run -p 5000:8080 db-perf
+```
+
+### Running the docker image in the background, in detached mode.
+
+```shell script
+docker run -d -p 5000:8080 db-perf
+```
+
+
+## Pushing the docker image to docker hub
+
+Login with your Docker Id
+
+```shell script
+docker login
+```
+
+Tag the image
+
+docker tag image username/repository:tag
+docker tag db-perf rybak90/db-perf:0.0.1-SNAPSHOT
+
+docker push rybak90/db-perf
+
+
+mvn package dockerfile:build
+
+mvn dockerfile:push
+
+
+https://spring.io/guides/topicals/spring-boot-docker/
