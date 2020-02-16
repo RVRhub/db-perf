@@ -1,0 +1,16 @@
+logging:
+  level:
+    org.springframework.data.r2dbc: DEBUG
+    org.springframework.data: DEBUG
+
+spring:
+  r2dbc:
+    initialization-mode: always
+    url: r2dbc:h2:mem:///pocdb?options=DB_CLOSE_DELAY=-1 #;DB_CLOSE_ON_EXIT=FALSE
+    name: sa
+    password:
+
+server:
+  port: 9090
+#  servlet:
+#    context-path: /api
