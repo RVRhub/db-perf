@@ -1,4 +1,11 @@
 # Getting Started
+Curl CL:
+
+```shell script
+curl http://localhost:9090/users -v
+
+curl http://localhost:9090/users -X POST -d '{"name":"John Doe","login":"test", "email":"email", "avatar":"avatar"}' -H "Content-Type: application/json" -v
+```
 
 ### Reference Documentation
 For further reference, please consider the following sections:
