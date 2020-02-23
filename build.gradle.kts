@@ -23,6 +23,7 @@ repositories {
 val reactorKotlinExtensionsVersion = "1.0.2.RELEASE"
 val springBootBomR2DbcVersion = "0.1.0.M3"
 val r2dbch2Version = "0.8.2.RELEASE"
+val r2dbcPosgresVersion = "0.8.1.RELEASE"
 val h2Version = "1.4.200" // with 200 there are errors as data-r2dbc is not yet updated
 val mockkVersion = "1.9.3"
 val reactorTestVersion = "3.3.2.RELEASE"
@@ -42,9 +43,20 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-    //TODO: postgres
-    implementation("io.r2dbc:r2dbc-h2:$r2dbch2Version")
-    implementation("com.h2database:h2:$h2Version")
+
+    //Flyway migration, starter-jdbc not compatible with r2dbc
+    //implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.flywaydb:flyway-core")
+
+    implementation("org.postgresql:postgresql")
+    implementation("io.r2dbc:r2dbc-postgresql:$r2dbcPosgresVersion")
+    implementation("io.r2dbc:r2dbc-pool")
+
+
+
+
+    testImplementation("io.r2dbc:r2dbc-h2:$r2dbch2Version")
+    testImplementation("com.h2database:h2:$h2Version")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

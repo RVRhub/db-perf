@@ -6,9 +6,43 @@ logging:
 spring:
   r2dbc:
     initialization-mode: always
-    url: r2dbc:h2:mem:///pocdb?options=DB_CLOSE_DELAY=-1 #;DB_CLOSE_ON_EXIT=FALSE
-    name: sa
-    password:
+    url: r2dbc:pool:postgresql://localhost:5435/postgres
+    username: postgres
+    password: postgres
+    pool:
+      initial-size: 100
+      max-size: 500
+      max-idle-time: 30m
+      validation-query: SELECT 1
+#  jpa:
+#    hibernate:
+#      ddl-auto: validate
+#  datasource:
+#    url: jdbc:postgresql://localhost:5435/postgres
+#    username: postgres
+#    password: postgres
+  flyway:
+    url: jdbc:postgresql://localhost:5435/postgres
+#    schemas: postgres
+    user: postgres
+    password: postgres
+    locations: classpath:db/migration
+    enabled: true
+    baseline-on-migrate: true
+
+#    schema: postgres
+  #  jpa:
+#    hibernate:
+#      ddl-auto: validate
+  #    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#datasource:
+#    url: jdbc:postgresql://localhost:5435/postgres
+#    username: postgres
+#    password: postgres
+#
+
 
 server:
   port: 9090
